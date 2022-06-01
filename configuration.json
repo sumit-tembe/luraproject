@@ -1,0 +1,30 @@
+{
+  "version": 3,
+  "name": "Krakend with Wildcard!!!",
+  "port": 8080,
+  "cache_ttl": "3600s",
+  "timeout": "60s",
+  "endpoints": [
+    {
+      "endpoint": "/xyz*",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": ["*"],
+      "backend": [
+        {
+          "group": "wildcard",
+          "host": ["http://xyz.service"],
+          "url_pattern": "",
+          "method": "GET",
+          "encoding": "no-op",
+          "extra_config": {
+            "wildcard": {
+              "keep_original_path": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
